@@ -1,0 +1,43 @@
+class Solution {
+    public int myAtoi(String s) {
+
+        int i = 0;
+        int n = s.length();
+
+        // Skip leading spaces
+        while (i < n && s.charAt(i) == ' ') {
+            i++;
+        }
+
+        // Sign
+        int sign = 1;
+
+        if (i < n && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
+            if (s.charAt(i) == '-') {
+                sign = -1;
+            }
+            i++;
+        }
+
+        // Build number
+        int num = 0;
+
+        while (i < n && Character.isDigit(s.charAt(i))) {
+            num = num * 10 + (s.charAt(i) - '0');
+            i++;
+        }
+
+        num = num * sign;
+
+        // Handle 32-bit integer overflow
+        if (num > 2147483647) {
+            return 2147483647;
+        }
+
+        if (num < -2147483648) {
+            return -2147483648;
+        }
+
+        return num;
+    }
+}
